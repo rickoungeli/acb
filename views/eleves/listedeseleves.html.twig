@@ -1,0 +1,106 @@
+{% extends "template.html.twig" %}
+
+{% block titre %} 
+    LISTE DES ELEVES
+{% endblock %}
+
+{% block contenu %} 
+    <main class="container">
+        <form class="form" method="POST" action="listeparclasse">
+            <fieldset class= "d-flex flex-wrap w-100">
+            <legend class=" fs-5">Vos options</legend>
+                <div class="form-group col-6 col-sm-3 me-1">
+                    <select class="form-select" id="annee-scolaire" name="annee-scolaire" placeholder="Année Scolaire">
+                        <option value="#" checked="checked">Année Scolaire</option>
+                        <option value="1">1986-1987</option>
+                        <option value="2">1987-1988</option>
+                        <option value="3">1988-1989</option>
+                        <option value="4">1989-1990</option>
+                        <option value="5">1990-1991</option>
+                        <option value="6">1991-1992</option>
+                        <option value="7">1992-1993</option>
+                        <option value="8">1993-1994</option>
+                        <option value="9">1994-1995</option>
+                        <option value="10">1995-1996</option>
+                    </select>
+                </div>
+                <div class="form-group col-5 col-sm-3 me-1">
+                    <select class="form-select" id="section" name="section" placeholder="Section">
+                        <option value="#" checked="checked">Section</option>
+                        
+                    </select>
+                </div>
+                <div class="form-group col-6 col-sm-3  me-1">
+                    <select class="form-select" id="classe" name="classe">
+                        <option value="#" checked="checked">Classe</option>
+                        <option value="1">1ère A</option>
+                        <option value="2">1ère B</option>
+                        <option value="3">1ère C</option>
+                        <option value="4">1ère D</option>
+                        <option value="5">1ère E</option>
+                        <option value="6">2ème A</option>
+                        <option value="7">2ème B</option>
+                        <option value="8">2ème C</option>
+                        <option value="9">2ème D</option>
+                    </select>
+                </div>
+                <button class="btn btn-success rounded col-5 col-sm-2" type="submit">ok</button>
+            </fieldset>
+        </form>
+        <section class="" id="section-liste">
+            <h2 class="fs-4">Liste des élèves de la {{}} </h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Noms</th>
+                        <th scope="col">Prénoms</th>
+                        <th scope="col">Pays de résidence</th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>NGELI NSABAKA</td>
+                        <td>Rickou</td>
+                        <td>France</td>
+                        <td><a href="" class="btn btn-warning">Modififier</a></td>
+                        <td><a href="" class="btn btn-warning">Supprimer</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>DIASONAMA KONDE</td>
+                        <td>Jean-François</td>
+                        <td>France</td>
+                        <td><a href="" class="btn btn-warning">Modififier</a></td>
+                        <td><a href="" class="btn btn-warning">Supprimer</a></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>MBENZA BADIANGA</td>
+                        <td>Guy</td>
+                        <td>Belgique</td>
+                        <td><a href="" class="btn btn-warning">Modififier</a></td>
+                        <td><a href="" class="btn btn-warning">Supprimer</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="" id="section-form-ajout">
+            <button class="btn btn-success d-block">Ajouter un élève dans cette classe</button>
+            <form class="form d-none" method="POST" action="ajouter">
+            <div class="form-group">
+                <label class="form-label" for="noms">Noms :</label>
+                <input class="form-control" type="text" id="noms" name="noms">
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="prénom">Prénom :</label>
+                <input class="form-control" type="text" id="prenom" name="prenom">
+            </div>
+        </section>
+
+    </main>
+    <script type="text/javascript" src="/js/listedeseleves.js" async></script>
+{% endblock %}
