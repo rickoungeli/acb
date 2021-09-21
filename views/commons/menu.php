@@ -1,36 +1,33 @@
 
-<div class="col-10 d-flex flex-column">
-    <p class="text-center d-none d-md-block">LES ANCIENS DU COLLEGE BOBOTO - 1992</p>
-    <hr class="d-none d-md-block">
-    <div class="d-flex flex-row justify-content-between bg-success p-1">
-        <nav class="navbar navbar-expand-md navbar-light bg-danger">
+<div class="col-11 d-flex flex-column p-0 m-0">
+    <p class="text-center m-0">LES ANCIENS DU COLLEGE BOBOTO - 1992</p>
+    <hr class="d-none d-md-block m-1">
+    <div class="d-flex flex-row justify-content-between bg-success ">
+        <nav class="navbar navbar-expand-md navbar-light bg-danger m-0 p-0">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav  mb-2 mb-lg-0">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=accueil">Accueil</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>accueil">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=eleves">Elèves</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>eleves">Elèves</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=projet2022">Projet2022</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>projet2022">Projet2022</a>
                     </li>
 
                 </ul>
             </div>
 
         </nav>
-        <nav class="navbar navbar-expand navbar-light bg-primary ">
-            <div class="collapse navbar-collapse container" id="navbarSupportedContent">
-                <ul class="navbar-nav  mb-2 mb-lg-0 ">
+        <nav class="navbar navbar-expand navbar-light bg-primary m-0 p-0">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav d-flex flex-column flex-md-row">
                     <li class="nav-item">
-                        <a href="?page=login" class="nav-link  ">Se connecter</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="?page=signup" class="nav-link ">S'inscrire</a>
+                        <a href="<?= URL ?>login" class="nav-link m-0 "><i class="fas fa-user-lock"></i> Se connecter</a>
                     </li>
                 </ul>
                 <!--

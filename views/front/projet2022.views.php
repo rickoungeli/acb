@@ -3,7 +3,7 @@ ob_start();
 $titre1 = "PROJET 2022";
 ?>
 
-<div class="alert alert-danger text-center">Aucun membre n'est inscrit à ce projet</div>
+<div class="alert alert-danger text-center mt-5">Aucun membre n'est inscrit à ce projet</div>
 <h2>Liste des inscrits</h2>
 
 <table class="table table-bordered table-striped w-100 ">
@@ -34,5 +34,5 @@ $titre1 = "PROJET 2022";
 
 <?php 
 $content = ob_get_clean() ;
-require "./views/template.php" ;
+require "./views/commons/template.php" ;
 ?>
