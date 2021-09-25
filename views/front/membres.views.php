@@ -15,7 +15,7 @@ $titre1 = "LISTE DES MEMBRES";
     </thead>
     <tbody>
         <?php
-        //$result = "";
+        $membres = getAllUsersFromBdd();
         
         foreach($membres as $membre) {
             echo "<tr>" ;

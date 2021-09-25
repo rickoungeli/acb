@@ -1,3 +1,4 @@
+   
 <?php
 
 class Securite {
@@ -23,7 +24,7 @@ class Securite {
     }
 
     public static function verificationAccess(){
-        return (isset($_SESSION['access']) && !empty($_SESSION['access']) && $_SESSION['access'] === "admin") ;
+        return (isset($_SESSION['user']) && !empty($_SESSION['user']) && $_SESSION['user'] === "connecté") ;
     }
 }
 

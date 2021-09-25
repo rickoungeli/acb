@@ -36,7 +36,6 @@ Header set X-XSS-Protection "1; mode=block"
 Header always append X-Frame-Options SAMEORIGIN
 Header set X-Content-Type-Options: "nosniff”
 </ifModule>
-
 # protection contre les injections de fichiers
 RewriteCond %{REQUEST_METHOD} GET
 RewriteCond %{QUERY_STRING} [a-zA-Z0-9_]=http:// [OR]

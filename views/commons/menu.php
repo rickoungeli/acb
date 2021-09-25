@@ -28,6 +28,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav d-flex flex-column flex-md-row">
                     <li class="nav-item">
+                        
                     <?php 
                     if(Securite::verificationAccess()) {
                         echo "<a href='?page=deconnexion' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se déconnecter</a>";

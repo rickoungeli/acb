@@ -15,41 +15,27 @@ function insertUserIntoBdd($firstname, $name, $email, $password, $date) {
     $stmt->closeCursor();
 }
 
+//Fonction pour récupérer tous les utilisateurs
 function getAllUsersFromBdd(){
     $bdd = connexionPDO();
     $req = 'SELECT * FROM users' ;
     $stmt = $bdd -> prepare($req) ;
-    //$stmt->bindValue(":email",$email,PDO::PARAM_STR);
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $users ;  
 }
 
-function getUserFromBdd($email){
+//Fonction pour chercher un utilisateur par son email
+function getOneUserFromBdd($email){
     $bdd = connexionPDO();
     $req = 'SELECT * FROM users WHERE email = :email' ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->bindValue(":email",$email,PDO::PARAM_STR);
     $stmt->execute();
-    $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    return $admin ;
+    return $user ;
 }
-
-function isUserInBdd($email, $password){
-
-    $admin = getUserFromBdd($email) ;
-    //$passwordHash = getUserFromBdd($email) ;
-    echo $admin['password'];
-    if(password_verify($password,$admin['password'])){
-        echo "Mot de passe correct";
-        return true ;
-    } else {
-        echo "Mot de passe incorrect";
-        return false ;
-    }
-}
-
 
 ?>

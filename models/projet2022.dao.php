@@ -15,4 +15,3 @@ function getMembersFromProjet2022(){
 
 
 ?>
-

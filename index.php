@@ -7,6 +7,7 @@ require_once("config/Securite.class.php") ;
 try {
     if(isset($_GET['page']) && !empty($_GET['page'])) {
         $page = Securite::secureHtml($_GET['page']) ;
+        $page = $_GET['page'] ;
         switch ($page) {
             case "accueil" : getPageAccueil() ;
             break ;
