@@ -2,13 +2,14 @@
 <html lang="fr" class="bg-light">
 
 <head>
+    <!-- <base href="/" /> -->
     <meta charset="utf-8">
     <meta name="robots" content="index, follow">
     <meta name="keywords" content="seo, google, site web, ...">
     <meta name="description" content="<?= $description ?> ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="auteur" content="NGELI NSABAKA Rickou">
-    <link rel="shortcut icon" type="image/png" href="../public/images/icones/award-fill.svg">
+    <link rel="shortcut icon" type="image/png" href="<?= URL ?>public/images/icones/award-fill.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
@@ -18,12 +19,11 @@
     <title><?= $title ?></title>
 </head>
 
-<body class="bg-light rounded min-vh-100 row">
-    <header class="container-fluid rounded-top w-100 ">
-
+<body class="bg-light rounded min-vh-100 row w-75 mx-auto">
+    <header class="container-fluid rounded-top fixed-top">
         <div class="row bg-dark text-white p-2 rounded-top ">
             <!-- Logo -->
-            <a href="accueil" class="col-1 border border-white rounded-2 d-none d-md-inline-block p-0 m-0" style="max-width:100px;">
+            <a href="<?= URL ?>page=accueil" class="col-1 border border-white rounded-2 d-none d-md-inline-block p-0 m-0" style="max-width:100px;">
                 <div class="bg-secondary m-0 p-1 rounded-2">
                     <img src="<?= URL ?>public/images/icon.png" class="img-fluid rounded-circle mx-auto">
                 </div>
@@ -37,14 +37,14 @@
     </header>
 
     <!-- contenu du site -->
-    <div class="container col-lg-8 " style="min-height: 500px;">
-        <h1 class="fs-1 mt-3 text-center"><?php echo $titre1 ?></h1>
+    <main class="container col-lg-8 bg-white rounded-2" style="min-height: 500px;">
+        <div id="faux-div" ></div>
+        <h1 class="container fs-1 text-center"><?php echo $titre1 ?></h1>
         <?= $content ?>
-    </div>
+    </main>
 
     <!-- Footer du site -->
     <footer class="bg-dark text-white text-center rounded-bottom w-100">
-
         <p class="p-2">&copy; Rickou Ngeli 2021</p>
     </footer>
 

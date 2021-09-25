@@ -2,7 +2,7 @@
 
 class Securite {
     public static function secureHtml($string){
-        return htmlentities($string) ;
+        return htmlentities(trim($string)) ;
     }
 
     public static function genereCookiePassword(){

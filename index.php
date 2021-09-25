@@ -12,11 +12,15 @@ try {
             break ;
             case "eleves" : getPageEleves() ;
             break ;
+            case "membres" : getPageMembres() ;
+            break ;
             case "projet2022" : getPageProjet2022() ;
             break ;
             case "login" : getPageLogin() ;
             break ;
             case "signup" : getPageSignup() ;
+            break ;
+            case "deconnexion" : getPageDeconnexion() ;
             break ;
             case "error301" :
             case "error302" :
@@ -36,7 +40,7 @@ try {
         }
     }
     else { 
-        getPageLogin(); 
+        getPageAccueil(); 
     }
 } catch(Exception $e) {
     $title = "Erreur" ;

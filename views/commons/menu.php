@@ -1,4 +1,3 @@
-
 <div class="col-11 d-flex flex-column p-0 m-0">
     <p class="text-center m-0">LES ANCIENS DU COLLEGE BOBOTO - 1992</p>
     <hr class="d-none d-md-block m-1">
@@ -10,15 +9,17 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>accueil">Accueil</a>
+                        <a class="nav-link my-0" aria-current="page" href="?page=accueil">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>eleves">Elèves</a>
+                        <a class="nav-link my-0" aria-current="page" href="?page=eleves">Elèves</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>projet2022">Projet2022</a>
+                        <a class="nav-link my-0" aria-current="page" href="?page=projet2022">Projet2022</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link my-0" aria-current="page" href="?page=membres">Membres</a>
+                    </li>
                 </ul>
             </div>
 
@@ -27,7 +28,13 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav d-flex flex-column flex-md-row">
                     <li class="nav-item">
-                        <a href="<?= URL ?>login" class="nav-link m-0 "><i class="fas fa-user-lock"></i> Se connecter</a>
+                    <?php 
+                    if(Securite::verificationAccess()) {
+                        echo "<a href='?page=deconnexion' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se déconnecter</a>";
+                    } else {
+                        echo "<a href='?page=login' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se connecter</a>";
+                    } 
+                    ?>
                     </li>
                 </ul>
                 <!--

@@ -1,4 +1,5 @@
 <?php 
+
     require_once("config/config.php");
 
     function getPageAccueil(){
@@ -21,11 +22,17 @@
             $inscrits = getMembersFromProjet2022() ;
             require_once("views/front/projet2022.views.php") ;
         } else {
-            throw new Exception("L'accès à cette page est réservé aux membres inscriits au projet2022");
+            throw new Exception("L'accès à cette page est réservé aux membres ayant un compte utilisateur");
             require_once("views/front/error.views.php") ;
         }
     }
 
+    function getPageDeconnexion(){
+        session_unset();
+        session_destroy();
+        $errorMessage = "Vous êtes déconnecté";
+        require_once("views/front/deconnexion.views.php") ;
+    }
 
 ?>
 

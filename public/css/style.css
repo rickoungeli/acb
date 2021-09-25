@@ -27,7 +27,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 footer {
-  height: 150px;
+  height: 50px;
+}
+
+@media only screen and (max-width: 768px){
+  #faux-div{
+    height: 100px;
+    background-color: blueviolet;
+  }
+}
+@media only screen and (min-width: 769px){
+  #faux-div{
+    height: 150px;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
