@@ -23,6 +23,7 @@
                 if($password == $user['password']){
                     echo "Email et Mot de passe corrects ";
                     $_SESSION['user'] = 'connecté' ;
+                    $_SESSION['id'] = $user['id'];
                     Securite::genereCookiePassword();
                     header ("Location: ?page=accueil") ;
                 } else {
@@ -55,6 +56,8 @@
             $email = securite::secureHTML($_POST['email']) ;
             $password = securite::secureHTML($_POST['password']) ;
             $passwordConfirm = securite::secureHTML($_POST['password-confirm']) ;
+            $country = securite::secureHTML($_POST['country']) ;
+            $phone = securite::secureHTML($_POST['phone']) ;
             $date = date("Y-m-d H:i:s", time()) ;
             if(getOneUserFromBdd($email)){
                 $alert = "Un compte utilise déja cet email" ;
@@ -66,9 +69,9 @@
 
                     //Insettion des données dans la bdd
                     try{
-                        insertUserIntoBdd($firstname, $name, $email, $password, $date) ;
+                        insertUserIntoBdd($firstname, $name, $email, $password, $date, $country, $phone) ;
                         $alert1 = "Vous avez été enregistré avec succès" ;
-                        $_POST['firstname']=$_POST['name']=$_POST['password']="";
+                        $_POST['firstname']=$_POST['name']=$_POST['password']=$_POST['email']=$_POST['phone']=$_POST['country']="";
                         //header ("Location: login.views.php") ;
                     } 
                     catch(Exception $e) {

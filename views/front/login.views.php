@@ -27,8 +27,8 @@ $titre1 = "";
             </div>
         </div>
 
-        <div class="row no-gutters">
-            <input type="submit" value="Valider" class="btn btn-primary btn-block col mt-3">
+        <div class="row no-gutters ms-2">
+            <input type="submit" value="Envoyer" class="btn btn-primary btn-block col-3">
         </div>
 
     </form>

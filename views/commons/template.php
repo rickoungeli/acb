@@ -20,13 +20,13 @@
 </head>
 
 <body class="bg-light rounded min-vh-100 row mx-auto" style="width: 98%;">
-    <header class="container-fluid rounded-top fixed-top">
+    <header class="container-fluid rounded-top mb-1">
         <div class="row bg-dark text-white p-2 rounded-top ">
             <!-- Logo -->
-            <a href="?page=accueil" class="col-1 border border-white rounded-2 d-none d-md-inline-block p-0 m-0" style="max-width:100px;">
-                <div class="bg-secondary m-0 p-1 rounded-2">
-                    <img src="./public/images/icon.png" class="img-fluid rounded-circle mx-auto">
-                </div>
+            <a href="?page=accueil" class="col-1 border border-white rounded-circle d-none d-md-inline-block p-0 m-0" style="max-height:80px; max-width:80px;">
+               
+                <img src="./public/images/icon.png" class="img-fluid rounded-circle mx-auto" style="max-height:80px; max-width:80px;">
+               
                 <p class="text-center p-0 m-0 fw-bold container logo" style="font-size: 1rem;">ACB92</p>
             </a>
 
@@ -38,7 +38,6 @@
 
     <!-- contenu du site -->
     <main class="container col-lg-8 bg-white rounded-2" style="min-height: 500px;">
-        <div id="faux-div" ></div>
         <h1 class="container fs-1 text-center"><?php echo $titre1 ?></h1>
         <?= $content ?>
     </main>

@@ -1,6 +1,8 @@
 <?php
 ob_start();
 $titre1 = "";
+//$hash = password_hash("rickou", PASSWORD_DEFAULT);
+//echo $hash;
 ?>
 
 <div class="alert alert-danger mt-2"><h2 class="text-center">CE SITE EST EN CONSTRUCTION</h2></div>
