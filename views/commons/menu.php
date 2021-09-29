@@ -9,16 +9,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="?page=accueil">Accueil</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>accueil">Accueil</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="?page=eleves">Elèves</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>eleves">Elèves</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="?page=projet2022">Projet2022</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>projet2022">Projet2022</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link my-0" aria-current="page" href="?page=membres">Membres</a>
+                        <a class="nav-link my-0" aria-current="page" href="<?= URL ?>membres">Membres</a>
                     </li>
                 </ul>
             </div>
@@ -31,9 +31,9 @@
                         
                     <?php 
                     if(Securite::verificationAccess()) {
-                        echo "<a href='?page=deconnexion' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se déconnecter</a>";
+                        echo "<a href='". URL ."deconnexion' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se déconnecter</a>";
                     } else {
-                        echo "<a href='?page=login' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se connecter</a>";
+                        echo "<a href='". URL ."login' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se connecter</a>";
                     } 
                     ?>
                     </li>
@@ -50,9 +50,9 @@
                             </a>
 
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a href="?page=profil" class="nav-link dropdown-item">Profil</a>
+                                <a href="profil" class="nav-link dropdown-item">Profil</a>
                                 <div class="dropdown-divider"></div>
-                                <a href="javascript:void(0)" onclick="handleClick" class="nav-link dropdown-item"><i class="fab fa-confluence"></i>Déconnexion</a>
+                                <a href="?page=javascript:void(0)" onclick="handleClick" class="nav-link dropdown-item"><i class="fab fa-confluence"></i>Déconnexion</a>
                             </ul>
 
                         </li>

@@ -4,7 +4,7 @@ $titre1 = "LISTE DES ELEVES";
 ?>
 
 <h3 class='alert alert-danger my-0 mt-3 text-center' role='alert'> Aucun élève n'est enregistré</h3>
-<form action="" method="POST"  class="form row border border-secondary p-1  rounded mb-1 w-100 ms-auto d-none">
+<form action="" method="POST"  class="form row no-gutters border border-secondary p-1  rounded mb-1 w-100 ms-auto d-none">
     <select name="sections" id="sections" class="col-12 col-sm-5 mb-1 me-1">
         <option value="#" selected="selected">Sections</option>
         <?php

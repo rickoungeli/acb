@@ -3,10 +3,10 @@ ob_start();
 $titre1 = "";
 ?>
 
-<div class="row w-100 m-0">
+<div class="row no-gutters w-100 m-0 align-items-center">
     <form action="" method="POST" class="form col-12 col-md-8 col-lg-6 mx-auto bg-white shadow-sm p-3 rounded border border-secondary ">
         <h1 class="text-center">Se connecter</h1>
-        <p class="mr-2 mb-2 text-center title7">Vous n'avez pas de compte? <a href="?page=signup" class="nav-link p-0 fsize d-inline">S'inscrire</a></p>
+        <p class="mr-2 mb-2 text-center title7">Vous n'avez pas de compte? <a href="signup" class="nav-link p-0 fsize d-inline">S'inscrire</a></p>
         <p class="alert alert-danger title7 d-none" id="message">Il y a des erreurs, veuillez vérifier votre saisie</p>
         
         <?php if($alert !== "") { echo "<div class='alert alert-danger my-0' role='alert'>" . $alert . "</div>";  } ?>

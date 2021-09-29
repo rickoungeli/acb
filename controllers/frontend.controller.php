@@ -1,7 +1,9 @@
 <?php 
     require_once("config/config.php");
+    require_once("models/eleves.dao.php");
+    require_once("models/sections.dao.php");
+    require_once("models/projet2022.dao.php");
     
-
     function getPageAccueil(){
         $title = "BIEVENUE SUR LE SITE DES ACB 1992" ;
         $description = "Cette page est la page d'accueil du site des Anciens Elèves du Collège Boboto de la promotion 1992, en sigle ACB92";
@@ -9,17 +11,13 @@
     }
 
     function getPageEleves(){
-        require_once("models/eleves.dao.php");
-        require_once("models/sections.dao.php");
         $title = "Liste des élèves du Collège Boboto de la promotion 1992" ;
         $description = "Cette page reconstitue les listes des Anciens Elèves du Collège Boboto de la promotion 1992, en sigle ACB92, insi que leurs différentes classes";
-        
         require_once("views/front/eleves.views.php") ;
     }
 
     function getPageProjet2022() {
         $alert = "";
-        require_once("models/projet2022.dao.php");
         if(Securite::verificationAccess()){
             //Si l'utilisateur a cliqué pour s'inscrire
             if(isset($_POST['id_user'])){

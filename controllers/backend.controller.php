@@ -7,7 +7,7 @@
     function getPageLogin(){
         $title = "Page de connexion" ;
         $description = "Page de login"; 
-        if(Securite::verificationAccess() && Securite::verificationCookie()) { header ("Location: ?page=accueil") ;} 
+        if(Securite::verificationAccess() && Securite::verificationCookie()) { header ("Location: accueil") ;} 
         
         $alert = "";
 
@@ -20,12 +20,13 @@
             
             if($user){
                 //if(password_verify($password,$user['password'])){
-                if($password == $user['password']){
+                $hash = md5($password);
+                if($hash == $user['password']){
                     echo "Email et Mot de passe corrects ";
                     $_SESSION['user'] = 'connecté' ;
                     $_SESSION['id'] = $user['id'];
                     Securite::genereCookiePassword();
-                    header ("Location: ?page=accueil") ;
+                    header ("Location: accueil") ;
                 } else {
                     $alert = "Mot de passe incorrect " ; 
                     require_once("views/front/login.views.php") ;
@@ -41,6 +42,7 @@
     function getPageSignup(){
         $title = "Page d'inscription" ;
         $description = "";
+        if(Securite::verificationAccess() && Securite::verificationCookie()) { header ("Location: accueil") ;} 
         $alert = "";
         $alert1 = "";
 
@@ -66,10 +68,10 @@
                 
                 if($password === $passwordConfirm){
                     //$hash = password_hash($password, PASSWORD_DEFAULT);
-
+                    $hash = md5($password);
                     //Insettion des données dans la bdd
                     try{
-                        insertUserIntoBdd($firstname, $name, $email, $password, $date, $country, $phone) ;
+                        insertUserIntoBdd($firstname, $name, $email, $hash, $date, $country, $phone) ;
                         $alert1 = "Vous avez été enregistré avec succès" ;
                         $_POST['firstname']=$_POST['name']=$_POST['password']=$_POST['email']=$_POST['phone']=$_POST['country']="";
                         //header ("Location: login.views.php") ;

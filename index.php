@@ -32,12 +32,11 @@ try {
             case "error500" :
             case "error505" : throw new Exception("Erreur de type : " . $page) ;
             break ;
-            case "error500" :
             case "error403" : throw new Exception("L'access à ce dossier n'est pas autorisé") ;
             break ;
-            case "error404" : 
-            default : throw new Exception("La page demandée n'a pas été trouvée") ;
-            break;
+            case "error404" : throw new Exception("La page demandée n'a pas été trouvée Erreur 404") ;
+            break ;
+            default : throw new Exception("La page demandée n'existe pas") ;
         }
     }
     else { 
@@ -50,6 +49,6 @@ try {
     require "views/commons/erreur.views.php" ;
 }
 
-
+?>
 
 
