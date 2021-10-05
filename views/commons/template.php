@@ -20,7 +20,7 @@
 </head>
 
 <body class="bg-light rounded min-vh-100 row mx-auto" style="width: 98%;">
-    <header class="container-fluid rounded-top mb-1">
+    <header class="container-fluid rounded-top mb-1 ">
         <div class="row no-gutters bg-dark text-white p-2 rounded-top ">
             <!-- Logo -->
             <a href="<?= URL ?>accueil" class="col-1 border border-white rounded-circle d-none d-md-inline-block p-0 m-0" style="max-height:80px; max-width:80px;">
@@ -37,7 +37,7 @@
     </header>
 
     <!-- contenu du site -->
-    <main class="container col-lg-8 bg-white rounded-2" style="min-height: 500px;">
+    <main class="container col-lg-8 bg-white rounded-2 perso-main" style="min-height: 500px;">
         <h1 class="container fs-1 text-center"><?php echo $titre1 ?></h1>
         <?= $content ?>
     </main>
@@ -48,8 +48,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="<?= URL ?>public/js/script.js" async></script>
-    <script type="text/javascript" src="<?= URL ?>public/js/listedeseleves.js" async></script>
+    <script type="text/javascript" src="<?= URL ?>public/js/eleves.js" async></script>
 </body>
 
 </html>

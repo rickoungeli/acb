@@ -11,8 +11,20 @@
     }
 
     function getPageEleves(){
+        $alert = "";
         $title = "Liste des élèves du Collège Boboto de la promotion 1992" ;
         $description = "Cette page reconstitue les listes des Anciens Elèves du Collège Boboto de la promotion 1992, en sigle ACB92, insi que leurs différentes classes";
+        /*
+        if(isset($_POST['classes']) && !empty($_POST['classes'])) {
+            $idclasse = Securite::secureHtml($_POST['classes']) ;
+            $eleves = getElevesByClassFromBdd($idclasse) ;
+            
+            if(count($eleves)<=0){
+                $alert = "Aucun élève n'a été trouvé dans cette classe" ;
+            }
+            echo "<script type='text/javascript'>document.querySelector('#btn-addEleve').classList.remove('d-none');</script>";
+        }
+        */
         require_once("views/front/eleves.views.php") ;
     }
 

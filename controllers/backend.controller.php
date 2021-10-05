@@ -54,7 +54,7 @@
         ) {
             //Check des variables postées par l'utilisateur
             $firstname = securite::secureHTML($_POST['firstname']) ;
-            $name = securite::secureHTML($_POST['name']) ;
+            $name = strtoupper(securite::secureHTML($_POST['name'])) ;
             $email = securite::secureHTML($_POST['email']) ;
             $password = securite::secureHTML($_POST['password']) ;
             $passwordConfirm = securite::secureHTML($_POST['password-confirm']) ;

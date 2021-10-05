@@ -30,7 +30,7 @@ $titre1 = "PROJET 2022";
             echo "<td width='30%'>".$inscrit['username']."</td>" ;
             echo "<td width='20%'>".$inscrit['userfirstname']."</td>" ;
             echo "<td width='30%'>".$inscrit['country']."</td>" ;
-            echo "<td width='15%'>".getdate($inscrit['dateinsc'])."</td>" ;
+            echo "<td width='15%'>".date("d/m/Y", strtotime($inscrit['dateinsc']))."</td>" ;
             echo "</tr>" ;
             $i++;
         }

@@ -1,7 +1,6 @@
 <?php
 require_once("pdo.php");
 
-
 function insertUserIntoBdd($firstname, $name, $email, $password, $date, $country, $phone) {
     $bdd = connexionPDO();
     $req = "INSERT INTO users (firstname, name, email, password, date, country, phone) VALUES (:firstname, :name, :email, :password, :date, :country, :phone)" ;
@@ -20,7 +19,7 @@ function insertUserIntoBdd($firstname, $name, $email, $password, $date, $country
 //Fonction pour récupérer tous les utilisateurs
 function getAllUsersFromBdd(){
     $bdd = connexionPDO();
-    $req = 'SELECT * FROM users' ;
+    $req = 'SELECT * FROM users ORDER BY name, firstname' ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->execute();
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);

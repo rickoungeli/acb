@@ -15,18 +15,15 @@ RewriteBase /
 
 RewriteRule ^(.*)$ index.php?page=$1
 
-
-
-ErrorDocument 301 https://www.acb92.com/index.php/?page=error301
-ErrorDocument 302 https://www.acb92.com/index.php/?page=error302
-ErrorDocument 400 https://www.acb92.com/index.php/?page=error400
-ErrorDocument 401 https://www.acb92.com/index.php/?page=error401
-ErrorDocument 402 https://www.acb92.com/index.php/?page=error402
-ErrorDocument 403 https://www.acb92.com/index.php/?page=error403
-ErrorDocument 404 https://www.acb92.com/index.php/?page=error404
-ErrorDocument 405 https://www.acb92.com/index.php/?page=error405
-ErrorDocument 500 https://www.acb92.com/index.php/?page=error500
-ErrorDocument 505 https://www.acb92.com/index.php/?page=error505
+ErrorDocument 302 /ACB92/index.php/?page=error302
+ErrorDocument 400 /ACB92/index.php/?page=error400
+ErrorDocument 401 /ACB92/index.php/?page=error401
+ErrorDocument 402 /ACB92/index.php/?page=error402
+ErrorDocument 403 /ACB92/index.php/?page=error403
+ErrorDocument 404 /ACB92/index.php/?page=error404
+ErrorDocument 405 /ACB92/index.php/?page=error405
+ErrorDocument 500 /ACB92/index.php/?page=error500
+ErrorDocument 505 /ACB92/index.php/?page=error505
 
 
 Options All -Indexes
@@ -38,7 +35,7 @@ AddDefaultCharset UTF-8
 <ifModule mod_headers.c>
 Header set X-XSS-Protection "1; mode=block"
 Header always append X-Frame-Options SAMEORIGIN
-Header set X-Content-Type-Options: "nosniff”
+Header set X-Content-Type-Options: "nosniff"
 </ifModule>
 
 # protection contre les injections de fichiers

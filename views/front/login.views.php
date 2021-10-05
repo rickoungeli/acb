@@ -26,9 +26,10 @@ $titre1 = "";
                 <p class="title7 text-danger d-none mb-0" id="message-pwd">{{message.pwd}}</p>
             </div>
         </div>
-
+        
         <div class="row no-gutters ms-2">
             <input type="submit" value="Envoyer" class="btn btn-primary btn-block col-3">
+            <div class="col-9 text-end"><a href="#" class="title7">Mot de passe oublié?</a></div>
         </div>
 
     </form>
