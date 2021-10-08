@@ -4,11 +4,13 @@ const combo_classe = document.querySelector('#classes')
 const nameInput = document.querySelector('#names')
 const boutonAfficheEleve = document.querySelector('#submit-btn')
 const table = document.querySelector('#listOfEleves')
-const boutonAddEleve = document.querySelector('#btn-addEleve')
-const showOverlay = document.querySelector('#select-form')
+const boutonAddEleve = document.querySelector('#btn-add-eleve')
 const overlay = document.querySelector('#overlay')
 const autoComplete = document.querySelector('#autocom-box')
+const btnSaveEleve = document.querySelector('#form-group3')
 let searchTerm = ''
+let datas = []
+let ideleve = ""
 
 let classe = [
     {'id': '1', 'name': '1ère A', 'id_section': '2'},
@@ -50,11 +52,121 @@ combo_section.addEventListener('change', ()=>{
     }
 })
 
-//Affichage liste des élèves d'une classe au click sur le combo classe
+//au click sur le combo classe, Affichage liste des élèves d'une classe 
 combo_classe.addEventListener('change', ()=>{
+    boutonAddEleve.classList.remove('d-none')
+    showListOfClass()
+})
+
+//Au click du btnddEleve, Afficher l'overlay et charger tous les élèves dans la modale  
+boutonAddEleve.addEventListener('click', (e)=>{
+    e.preventDefault()
+    autoComplete.style.opacity='1'
+    getAllElevesFromBdd()
+    showOverlay()
+    //maskInput()
+})
+
+
+//filter la saisie utilisateur et charger la modale
+nameInput.addEventListener('input', (e) => {
+    searchTerm = e.target.value //Je récupère tout ce qui est tapé dans l'input
+    if(searchTerm=="")  {maskInput()} 
+    loadListEleve(datas) 
+})
+
+//Enregistrement d'un élève dans une classe
+btnSaveEleve.addEventListener('click', (e)=>{
+    e.preventDefault()
+    saveEleve()
+})
+
+
+//Fermeture de l'overlay
+document.querySelector('.close').addEventListener('click', ()=>{
+    searchTerm == ""
+    closeOverlay()
+})
+
+function getAllElevesFromBdd(){
+    var xhr = new XMLHttpRequest()
+    xhr.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200) {
+            datas = JSON.parse(this.responseText)
+            loadListEleve(datas)
+        } else {
+            $errorMessage = "Un problème est survenu";
+            //require_once("www.acb92.com/views/common/erreur.views.php") ;
+        }
+    }
+    xhr.open("GET", `../../models/eleves.dao.php?function=getAllElevesFromBdd`, true)
+    xhr.send()
+}
+
+function loadListEleve(datas){
+    autoComplete.innerHTML = ""
+    for(i=0; i<datas.length; i++){
+        if(datas[i].names.toLowerCase().includes(searchTerm.toLowerCase())) {
+            maskInput()
+            autoComplete.innerHTML +=
+            `
+            <li class='py-1 btn w-100 text-start data' onclick="printInModale(${datas[i].id}, '${datas[i].names}', '${datas[i].firstname}', '${datas[i].commune}')">
+                <span id='overlay-id-item' class='d-none'>${datas[i].id}</span>
+                <span id='overlay-name-item'>${datas[i].names}</span>
+                <span id='overlay-firstname-item'>${datas[i].firstname}</span>
+                <span id='overlay-commune-item' class='d-none'>${datas[i].commune}</span>
+            </li>
+            `
+        }
+    }
+    if(autoComplete.innerHTML == ""){
+        showInput()
+    }
+}
+
+
+function showOverlay(){
+    overlay.classList.remove('d-none')
+}
+
+function closeOverlay(){
+    document.querySelector('#id').value = ""
+    document.querySelector('#names').value = ""
+    document.querySelector('#firstname').value = ""
+    document.querySelector('#commune').value = ""
+    autoComplete.innerHTML = ""
+    searchTerm=""
+    overlay.classList.add('d-none')
+}
+
+function showInput(){
+    autoComplete.classList.add('d-none')
+    document.querySelector('#form-group1').classList.remove('d-none')
+    document.querySelector('#form-group2').classList.remove('d-none')
+    document.querySelector('#form-group3').classList.remove('d-none')
+}
+
+function maskInput(){
+    autoComplete.classList.remove('d-none')
+    document.querySelector('#form-group1').classList.add('d-none')
+    document.querySelector('#form-group2').classList.add('d-none')
+    document.querySelector('#form-group3').classList.add('d-none')
+}
+
+
+function printInModale(id, names, firstname, commune){
+    document.querySelector('#id').value = id
+    document.querySelector('#names').value = names
+    document.querySelector('#firstname').value = firstname
+    document.querySelector('#commune').value = commune
+    showInput()
+}
+
+function showListOfClass(){
+    closeOverlay()
     table.innerHTML = ""
     if(combo_classe.value != '#'){
-        var xhr = new XMLHttpRequest()
+        let xhr = new XMLHttpRequest()
         xhr.onreadystatechange = function(){
             boutonAddEleve.classList.remove("d-none")
             if(this.readyState == 4 && this.status == 200) {
@@ -63,6 +175,7 @@ combo_classe.addEventListener('change', ()=>{
                 if(eleves.length >0){
                     let num = 1
                     for(i=0; i<eleves.length; i++) {
+
                         table.innerHTML += `
                         <tr>
                             <td width='5%' class='text-end'>${num}</td>
@@ -87,66 +200,71 @@ combo_classe.addEventListener('change', ()=>{
         xhr.open("GET", `../../models/eleves.dao.php?idclasse=${combo_classe.value}&function=getElevesByClassFromBdd`, true)
         xhr.send()
     }
-})
+}
+
+function saveEleve(){
+    ideleve = document.querySelector('#id').value 
+    let names = document.querySelector('#names').value.toUpperCase().trim()
+    let firstname = document.querySelector('#firstname').value.trim()
+    let commune = document.querySelector('#commune').value.trim()
+    //si l'id est fourni, l'eleve existe déjà dans la bdd sinon il faut d'abord enregistrer l'élève
+    //if(names!=""){
+        if(ideleve=="") {
+            //Test des inputs
 
 
-//Affichage de l'overlay quand on clique sur le bouton Ajouter un élève 
-showOverlay.addEventListener('submit', (e)=>{
-    e.preventDefault()
-    getListEleves()
-})
 
-//filter la saisie utilisateur et charger la modale
-nameInput.addEventListener('input', (e) => {
-    searchTerm = e.target.value //Je récupère tout ce qui est tapé dans l'input
-    getListEleves()
-})
-
-
-//Fonction pour récupérer la liste des élèves '
-function getListEleves(){
-    autoComplete.innerHTML = ""
-    overlay.classList.remove('d-none')
-    autoComplete.style.opacity = '1'
-    var xhr = new XMLHttpRequest()
-    xhr.onreadystatechange = function(){
-        if(this.readyState == 4 && this.status == 200) {
-            const eleves = JSON.parse(this.responseText)
-            loadModale(eleves)
-        } else {
-            $errorMessage = "Un problème est survenu";
-            //require_once("www.acb92.com/views/common/erreur.views.php") ;
-        }
+            createNewEleve(names, firstname, commune)
+        } 
+        saveEleveInClasse(ideleve, combo_classe.value)
+    /*
+    } else {
+        names.value = ""
+        closeOverlay()
     }
-    xhr.open("GET", `../../models/eleves.dao.php?function=getAllElevesFromBdd`, true)
+    */
+   
+}
+
+function createNewEleve(names, firstname, commune, ideleve){
+    const data = new FormData()
+    data.append('names', names)
+    data.append('firstname', firstname)
+    data.append('commune', commune)
+    let xhr = new XMLHttpRequest()
+    xhr.open("POST", `../../models/eleves.dao.php?function=createNewEleve`)
+    xhr.onload = function(){
+            getIdEleve(names, firstname)
+    }
+
+    xhr.send(data)
+}
+
+function getIdEleve(names, firstname){
+    //const data = new FormData()
+    //data.append('names', names)
+    //data.append('firstname', firstname)
+    let xhr = new XMLHttpRequest()
+    xhr.onload = function(){
+        let id = JSON.parse(this.responseText)
+        ideleve = id.id
+        console.log(ideleve);
+        saveEleveInClasse(ideleve, combo_classe.value)
+        //return ideleve
+    }
+    xhr.open("GET", `../../models/eleves.dao.php?function=getIdEleve&names=${names}&firstname=${firstname}`)
     xhr.send()
 }
 
-//Fonction pour charger la modale
-function loadModale(datas){
-    autoComplete.innerHTML = (
-        datas.filter(data => data.names.toLowerCase().includes(searchTerm.toLowerCase())) 
-        .map(data => ( 
-            `
-            <div>
-                <li class='py-1' >
-                    <span id='overlay-id-item' class='d-none'>${data.id}</span>
-                    <span id='overlay-name-item'>${data.names}</span>
-                    <span id='overlay-firstname-item'>${data.firstname}</span>
-                    <span id='overlay-commune-item' class='d-none'>${data.commune}</span>
-                </li>
-            </div>
-            `
-        ))
-        .join('') 
-        
-    )
+function saveEleveInClasse(ideleve, idclasse){
+    console.log(ideleve);
+    const data = new FormData()
+    data.append('ideleve', ideleve)
+    data.append('idclasse', idclasse)
+    let xhr = new XMLHttpRequest()
+    xhr.open("POST", `../../models/eleves.dao.php?function=saveEleveInClass`)
+    xhr.onload = function(){
+        showListOfClass()
+    }
+    xhr.send(data)
 }
-
-
-
-//Fermeture de l'overlay
-document.querySelector('.close').addEventListener('click', ()=>{
-    overlay.classList.add('d-none')
-    autoComplete.innerHTML = ""
-})
