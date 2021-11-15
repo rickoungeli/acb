@@ -21,7 +21,7 @@
                         <ul class="dropdown-menu bg-secondary" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="<?= URL ?>projet2022">Liste des inscrits</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item disabled" href="<?= URL ?>activites">Proposition d'activités</a></li>
+                            <li><a class="dropdown-item" href="<?= URL ?>activites">Proposition d'activités</a></li>
                             
                         </ul>
                     </li>

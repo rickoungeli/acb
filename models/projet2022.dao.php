@@ -32,4 +32,14 @@ function insertMembersToProjet2022($id){
     return true ;
 }
 
+function getAllPropositionsOfActivityFromBdd(){
+    $bdd = connexionPDO();
+    $req = "SELECT * FROM users" ;
+    $stmt = $bdd -> prepare($req) ;
+    $stmt->execute();
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $resultat ;
+}
+
 ?>
