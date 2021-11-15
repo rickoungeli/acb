@@ -7,8 +7,46 @@ $titre1 = "PROPOSITIONS D'ACTIVITES";
 <form action="" method="POST" class="d-flex flew-row justify-content-between mx-2 my-1">
     <h2 class="align-middle">Activités proposées</h2>
     <input type="text" name="id_user" class="d-none"/>
-    <input type="submit" class="btn btn-primary" value="Proposer une activité" />
+    <a href="#" class="btn btn-primary" >Proposer une activité" </a>
 </form>
+<!-- Add new eleve in  class -->
+<div id="overlay" class="">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-primary">Ajout d'une élève</h5>
+                <button type="button" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="row no-gutters py-1 mb-0 scroller">
+                    <div class="form-group col-12 ">
+                        <input type="text" name="id" id="id"  class="form-control w-100 text-danger d-none">
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="names">Noms de l'élève :</label>
+                        <input type="text" name="names" id="names" placeholder="Taper un nom ou sélectionner dans la liste"  class="form-control w-100 text-danger">
+                    </div>
+                    <div class="form-group mb-1 col-12 " id="form-group1">
+                        <label for="firstname">Prénom de l'élève</label>
+                        <input type="text" name="firstname" id="firstname"  class="form-control w-100 text-danger">
+                    </div>
+                    <div class="form-group mb-1 col-12 " id="form-group2">
+                        <label for="commune">Commune où il vivait</label>
+                        <input type="text" name="commune" id="commune"  class="form-control w-100 text-danger">
+                    </div>
+                    <div class="col-12 text-center mb-1 " id="form-group3">
+                        <button class="btn btn-primary" >Enregistrer</button>
+                    </div>
+                    <div class="form-group col-12 border border-dark " id="autocom-box">
+                        
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <table class="table table-bordered table-striped w-100 ">
     <thead>
         <tr class="text-center bg-info text-light">

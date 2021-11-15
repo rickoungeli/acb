@@ -19,8 +19,8 @@
             //On vérifie si l'utilisateur a coché se souvenir de moi pour créer ou non des cookies
             if(isset($_POST['remember-checkbox'])){
                 //if(isset($_COOKIE['email']) && $_COOKIE['email'] != $email && isset($_COOKIE['password']) && $_COOKIE['password'] != $password){
-                    setcookie('email', $email);
-                    setcookie('password', $password);
+                    setcookie('email', $email, time()+30*24*3600);
+                    setcookie('password', $password,  time()+3000*24*3600);
                 //}
             } else {
                 if(isset($_COOKIE['email']) && isset($_COOKIE['password'])){
@@ -28,8 +28,6 @@
                     setcookie('password', "");
                 }
             }
-            
-
 
             //On vérifie si cet utilisateur est enregistré dans la bdd
             $user = getOneUserFromBdd($email) ;
