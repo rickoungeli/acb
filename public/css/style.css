@@ -1,15 +1,42 @@
-@import url("https://cdn.jsdelivr.net/gh/jgthms/minireset.css@master/minireset.min.css");
 *, ::before, ::after {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  outline: none;
 }
-
+.z-index-1000 {
+  z-index: 1000;
+}
+html, body {
+  font-size: 1em;
+  background-color: rgb(212, 236, 165);
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+}
+header a.col-1 {
+  background-image: url('public/images/icon.png');
+  z-index: 1000;
+}
 h1, h2, h3, h4, h5, h6 {
   font-family: "Roboto", sans-serif;
   font-weight: bold;
 }
 
+li.nav-item a {
+  color: white !important;
+  text-shadow: 0 1.2px 1px rgba(0, 0, 0, .6) !important;
+}
+li.nav-item {
+  transition: color .5s;
+}
+li.nav-item:hover {
+  background-color: rgb(75, 245, 165);
+  color: rgba(0, 0, 0, .6) !important;
+}
 .title7 { 
   font-size: 0.8rem;
   font-style: italic;
@@ -30,16 +57,40 @@ footer {
   height: 50px;
 }
 
-@media only screen and (max-width: 768px){
-  #faux-div{
-    height: 100px;
-    background-color: blueviolet;
-  }
-}
-@media only screen and (min-width: 769px){
-  #faux-div{
-    height: 150px;
-  }
+#overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, .6);
 }
 
-/*# sourceMappingURL=style.css.map */
+.modal-content {
+  min-height: 400px !important;
+}
+
+#autocom-box {
+  border: none !important;
+  padding: 10px 8px !important;
+  overflow-y: auto !important;
+  opacity: 0;
+  transition: opacity, 500ms;
+}
+
+#autocom-box li {
+  list-style: none !important;
+  border-radius: 3px !;
+
+}
+
+#autocom-box li:hover {
+  background: #abb8f3 !important;
+}
+
+.scroller {
+  height: 70%;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+}

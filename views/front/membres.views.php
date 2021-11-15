@@ -15,16 +15,17 @@ $titre1 = "LISTE DES MEMBRES";
     </thead>
     <tbody>
         <?php
-        //$result = "";
-        
+        $membres = getAllUsersFromBdd();
+        $i=1;
         foreach($membres as $membre) {
             echo "<tr>" ;
-            echo "<td width='5%' class='text-end'>".$membre['id']."</td>" ;
+            echo "<td width='5%' class='text-end'>".($i)."</td>" ;
             echo "<td width='30%'>".$membre['name']."</td>" ;
             echo "<td width='20%'>".$membre['firstname']."</td>" ;
             echo "<td width='30%'>".$membre['country']."</td>" ;
             echo "<td width='15%'>".$membre['observ']."</td>" ;
             echo "</tr>" ;
+            $i++;
         }
         
         ?>

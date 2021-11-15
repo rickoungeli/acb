@@ -4,25 +4,25 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
 RewriteRule ^(.+)$ index.php
-RewriteRule ^(accueil)$ views/front/accueil.views.php
-RewriteRule ^(login)$ login.views.php
-RewriteRule ^(signup)$ views/front/signup.views.php
-RewriteRule ^(projet2022)$ views/front/projet2022.views.php
-RewriteRule ^(eleves)$ views/front/eleves.views.php
-RewriteRule ^(membres)$ views/front/membres.views.php
-RewriteRule ^(deconnexion)$ views/front/deconnexion.views.php
+#RewriteRule ^(accueil)$ views/front/accueil.views.php
+#RewriteRule ^(login)$ login.views.php
+#RewriteRule ^(signup)$ views/front/signup.views.php
+#RewriteRule ^(projet2022)$ views/front/projet2022.views.php
+#RewriteRule ^(eleves)$ views/front/eleves.views.php
+#RewriteRule ^(membres)$ views/front/membres.views.php
+#RewriteRule ^(deconnexion)$ views/front/deconnexion.views.php
 
 
-ErrorDocument 301 http://www.acb92.com/index.php/?page=error301
-ErrorDocument 302 http://www.acb92.com/index.php/?page=error302
-ErrorDocument 400 http://www.acb92.com/index.php/?page=error400
-ErrorDocument 401 http://www.acb92.com/index.php/?page=error401
-ErrorDocument 402 http://www.acb92.com/index.php/?page=error402
-ErrorDocument 403 http://www.acb92.com/index.php/?page=error403
-ErrorDocument 404 http://www.acb92.com/index.php/?page=error404
-ErrorDocument 405 http://www.acb92.com/index.php/?page=error405
-ErrorDocument 500 http://www.acb92.com/index.php/?page=error500
-ErrorDocument 505 http://www.acb92.com/index.php/?page=error505
+ErrorDocument 301 ACB92/index.php/?page=error301
+ErrorDocument 302 ACB92/index.php/?page=error302
+ErrorDocument 400 ACB92/index.php/?page=error400
+ErrorDocument 401 ACB92/index.php/?page=error401
+ErrorDocument 402 ACB92/index.php/?page=error402
+ErrorDocument 403 ACB92/index.php/?page=error403
+ErrorDocument 404 ACB92/index.php/?page=error404
+ErrorDocument 405 ACB92/index.php/?page=error405
+ErrorDocument 500 ACB92/index.php/?page=error500
+ErrorDocument 505 ACB92/index.php/?page=error505
 
 
 Options All -Indexes

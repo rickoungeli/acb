@@ -3,10 +3,10 @@ ob_start();
 $titre1 = "";
 ?>
 
-<div class="row w-100">
+<div class="row no-gutters w-100">
     <form action="" method="POST" class="form col-12 col-md-8 col-lg-6  mx-auto bg-white shadow-sm p-3 rounded border border-secondary ">
         <h1 class="text-center">S'inscrire</h1>
-        <p class="mr-2 mb-2 text-center  title7">Vous avez déjà un compte? <a href="?page=login" class="nav-link p-0 fsize d-inline">Se connecter</a></p>
+        <p class="mr-2 mb-2 text-center  title7">Vous avez déjà un compte? <a href="login" class="nav-link p-0 fsize d-inline">Se connecter</a></p>
         <p class="alert alert-danger title7 d-none" id="message">Il y a des erreurs, veuillez vérifier votre saisie</p>
 
         <?php if($alert !== "") { echo "<div class='alert alert-danger my-0' role='alert'>" . $alert . "</div>";  } ?>
@@ -27,7 +27,7 @@ $titre1 = "";
                 <p class="title7 text-danger d-none mb-0" id="message-name">{{message.name}}</p>
             </div>
         </div>
-        
+
         <div class="form-group mb-2 mt-2 d-flex">
             <label class="w-25">Email</label>
             <div class="d-flex flex-column w-75">
@@ -35,6 +35,24 @@ $titre1 = "";
                 <p class="title7 text-danger d-none mb-0" id="message-email">{{message.email}}</p>
             </div>
         </div>
+
+        <div class="form-group mb-2 mt-2 d-flex">
+            <label class="w-25">Téléphone</label>
+            <div class="d-flex flex-column w-75">
+                <input type="text" class="form-control" name="phone" id="email" placeholder="Téléphone" value="<?php if(isset($_POST['phone'])) echo $_POST['phone'] ?>"/>
+                <p class="title7 text-danger d-none mb-0" id="message-phone">{{message.phone}}</p>
+            </div>
+        </div>
+        
+        <div class="form-group mb-2 mt-2 d-flex">
+            <label class="w-25">Pays de résidence</label>
+            <div class="d-flex flex-column w-75">
+                <input type="text" class="form-control" name="country" id="country" placeholder="Pays de résidence" value="<?php if(isset($_POST['country'])) echo $_POST['country'] ?>"/>
+                <p class="title7 text-danger d-none mb-0" id="message-pays">{{message.pays}}</p>
+            </div>
+        </div>
+
+        <hr class="mb-1">
 
         <div class="form-group mb-2 d-flex">
             <label class="w-25">Mot de passe</label>
@@ -51,8 +69,8 @@ $titre1 = "";
                 <p class="title7 text-danger d-none mb-0" id="message-pwd-2">{{message.passwordConfirm}}</p>
             </div>
         </div>
-        <div class="row no-gutters">
-            <input type="submit" value="Envoyer" class="btn btn-primary btn-block col">
+        <div class="row no-gutters ms-2">
+            <input type="submit" value="Envoyer" class="btn btn-primary btn-block col-3">
         </div>
 
     </form>
