@@ -25,22 +25,19 @@ $titre1 = "PROPOSITIONS D'ACTIVITES";
                         <input type="text" name="id" id="id"  class="form-control w-100 text-danger d-none">
                     </div>
                     <div class="form-group col-12">
-                        <label for="names">Noms de l'élève :</label>
-                        <input type="text" name="names" id="names" placeholder="Taper un nom ou sélectionner dans la liste"  class="form-control w-100 text-danger">
+                        <label for="secteur">Secteur d'activité :</label>
+                        <input type="text" name="secteur" id="secteur" placeholder="Taper un secteur d'activité"  class="form-control w-100 text-danger">
                     </div>
                     <div class="form-group mb-1 col-12 " id="form-group1">
-                        <label for="firstname">Prénom de l'élève</label>
-                        <input type="text" name="firstname" id="firstname"  class="form-control w-100 text-danger">
+                        <label for="activite">Activité proposée</label>
+                        <input type="text" name="activite" id="activite"  class="form-control w-100 text-danger">
                     </div>
                     <div class="form-group mb-1 col-12 " id="form-group2">
-                        <label for="commune">Commune où il vivait</label>
-                        <input type="text" name="commune" id="commune"  class="form-control w-100 text-danger">
+                        <label for="commentaire">Commentaire</label>
+                        <textarea name="commentaire" id="commentaire" cols="30" rows="10"></textarea>
                     </div>
                     <div class="col-12 text-center mb-1 " id="form-group3">
                         <button class="btn btn-primary" >Enregistrer</button>
-                    </div>
-                    <div class="form-group col-12 border border-dark " id="autocom-box">
-                        
                     </div>
                 </form>
             </div>
