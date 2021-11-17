@@ -39,6 +39,7 @@
                     echo "Email et Mot de passe corrects ";
                     $_SESSION['user'] = 'connecté' ;
                     $_SESSION['id'] = $user['id'];
+                    $_SESSION['name'] = $user['name'];
                     Securite::genereCookiePassword();
                     header ("Location: accueil") ;
                 } else {

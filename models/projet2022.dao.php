@@ -1,5 +1,23 @@
 <?php
+session_start();
+
+const HOST_NAME = "nsxuijracb92.mysql.db";
+const DATABASE_NAME = "nsxuijracb92";
+const USER_NAME = "nsxuijracb92";
+const PASSWORD = "Le29011974";
+//require_once("../config/config.php");
 require_once("pdo.php");
+
+$function = $_GET['function'] ;
+switch ($function) {
+    case "insertPropositionOfActivite" : insertPropositionOfActivite() ;
+        break ;
+    case "getAllPropositionsOfActivityFromBdd" : getAllPropositionsOfActivityFromBdd();
+        break;
+    case "addNotification" : insertNotificationIntoBdd();
+    break;
+}
+
 
 function getOneMemberFromProjet2022($id){
     $bdd = connexionPDO();
@@ -32,14 +50,56 @@ function insertMembersToProjet2022($id){
     return true ;
 }
 
+function insertPropositionOfActivite(){
+    //On récupère les données envoyées par l'utilisateur
+    $auteur = $_SESSION['id'];
+    $secteur = $_POST['secteur'];
+    $libelle = $_POST['libelle'];
+    if($_POST['comment'] != "") {$comment = $_POST['comment'];} else {$comment = "";}
+
+    //On enregistre l'activité dans la bdd
+    $bdd = connexionPDO();
+    $req = "INSERT INTO activites (secteur, libelle, comment, auteur) VALUES (:secteur, :libelle, :comment, :auteur)" ;
+    $stmt = $bdd -> prepare($req) ;
+    $stmt->bindValue(":secteur",$secteur,PDO::PARAM_STR);
+    $stmt->bindValue(":libelle",$libelle,PDO::PARAM_STR);
+    $stmt->bindValue(":comment",$comment,PDO::PARAM_STR);
+    $stmt->bindValue(":auteur",$auteur);
+    $stmt->execute();
+    $stmt->closeCursor();
+    return true ;
+    
+}
+
 function getAllPropositionsOfActivityFromBdd(){
     $bdd = connexionPDO();
-    $req = "SELECT * FROM users" ;
+    $req = "SELECT users.name AS auteur, activites.id AS idactivite, activites.secteur AS secteur, activites.libelle AS libelle, activites.comment AS comment, activites.date_cre AS date_cre  FROM activites, users WHERE activites.auteur = users.id ORDER BY auteur" ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->execute();
     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    return $resultat ;
+    if(isset($_GET['function']) && $_GET['function'] == 'getAllPropositionsOfActivityFromBdd'){
+        echo json_encode($resultat); 
+    } else {
+        return $resultat;
+    }
 }
+
+function insertNotificationIntoBdd(){
+    //On récupère les données envoyées par l'utilisateur
+    $libelle = $_POST['message'];
+    $iduser = $_SESSION['id'];
+
+    //On enregistre la notification dans la bdd
+    $bdd = connexionPDO();
+    $req = "INSERT INTO notifications (libelle, iduser) VALUES (:libelle, :iduser)" ;
+    $stmt = $bdd -> prepare($req) ;
+    $stmt->bindValue(":libelle",$libelle,PDO::PARAM_STR);
+    $stmt->bindValue(":iduser",$iduser,PDO::PARAM_INT);
+    $stmt->execute();
+    $stmt->closeCursor();
+    return true ;
+}
+
 
 ?>

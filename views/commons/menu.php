@@ -1,3 +1,4 @@
+
 <div class="col-11 d-flex flex-column p-0 m-0">
     <p class="text-center m-0  fw-bold">LES ANCIENS DU COLLEGE BOBOTO - 1992</p>
     <hr class="d-none d-md-block m-1">
@@ -39,7 +40,7 @@
                         
                     <?php 
                     if(Securite::verificationAccess()) {
-                        echo "<a href='". URL ."deconnexion' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se déconnecter</a>";
+                        echo "<a href='". URL ."deconnexion' class='nav-link m-0 text-light'><i class='fas fa-user-lock'></i> Se déconnecter</a>";
                     } else {
                         echo "<a href='". URL ."login' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se connecter</a>";
                     } 

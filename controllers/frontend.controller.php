@@ -4,6 +4,8 @@
     require_once("models/sections.dao.php");
     require_once("models/projet2022.dao.php");
     
+  
+
     function getPageAccueil(){
         if(Securite::verificationAccess()){
             $title = "BIEVENUE SUR LE SITE DES ACB 1992" ;
@@ -67,29 +69,24 @@
         }
     }
 
-    function getPageActivitesProjet2022() {
+    function getPagePropositionActivitesProjet2022() {
         $alert = "";
+        $alert1 = "";
         if(Securite::verificationAccess()){
-            //Si l'utilisateur a cliqué pour s'inscrire
-            if(isset($_POST['id_user'])){
-                $id = $_SESSION['id'];
-                //On vérifie si cet utilisateur est déjà inscrit
-                $user=getOneMemberFromProjet2022($id);
-                if($user){
-                    $alert = "Vous êtes déjà inscrit à ce projet";
-                } else {
-                    if(insertMembersToProjet2022($id)){
-                        require_once("views/front/activites.views.php") ;
-                    }
-                    else {
-                        $errorMessage = "Un problème est survenu";
-                        require_once("views/common/erreur.views.php") ;
-                    }
-                }
-            }
-            $title = "Projet 2022" ;
-            $description = "Cette page est la page d'informations pour les membres participants au projet de création d'une entreprise par les Anciens du Collège Boboto de la promotion 1992";
-            require_once("views/front/activites.views.php") ;
+            $auteur = $_SESSION['id'];
+            //On vérifie si cet utilisateur est déjà inscrit
+            $user=getOneMemberFromProjet2022($auteur);
+            if($user){
+                                
+                $title = "Propositions d'activités pour le Projet 2022" ;
+                $description = "Cette page est la page d'informations pour les membres participants au projet de création d'une entreprise par les Anciens du Collège Boboto de la promotion 1992";
+                require_once("views/front/activites.views.php") ;
+                
+            } else {
+                
+                throw new Exception("Vous n'êtes pas inscrit à ce projet, vous ne pouvez pas effectuer cette action");
+                require_once("views/common/erreur.views.php") ;
+            }  
         } else {
             throw new Exception("Veuiller vous connecter pour accéder à cette page");
             require_once("views/front/error.views.php") ;
