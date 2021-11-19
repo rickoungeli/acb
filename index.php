@@ -25,6 +25,8 @@ try {
             break ;
             case "password_forget" : getPagePasswordForget() ;
             break ;
+            case "new_password" : getPageNewPassword() ;
+            break ;
             case "activites" : getPagePropositionActivitesProjet2022() ;
             break ;
             case "error301" :

@@ -36,8 +36,8 @@
                     </a>
                     <h3 class="text-white text-center mt-2">MOT DE PASSE OUBLIE</h3>
                 </div>
-                <?php if($ctrl == 0) { echo "<div class='alert alert-danger my-0' role='alert'>L'email est incorrect</div>";  } ?>
-                <?php if($ctrl == 1) { echo "<div class='alert alert-success my-0' role='alert'><p class='fw-bold mb-1'>Votre demande a été prise en compte</p></br><p>Vous allez recevoir un lien de réinitialisation de votre mot de passe par courriel. Cela peut prendre quelques minutes.</p></div>";  } ?>
+                <?php if($alert != "") { echo "<div class='alert alert-danger my-0' role='alert'>".$alert."</div>";  } ?>
+                <?php if($alert1 != "") { echo "<div class='alert alert-success my-0' role='alert'><p class='fw-bold mb-1'>".$alert1."</p></br><p>Vous allez recevoir un lien de réinitialisation de votre mot de passe par courriel. Cela peut prendre quelques minutes.</p></div>";  } ?>
 
                 <?php if($ctrl == 0) echo "<p class='mr-2 my-3 text-center'>Pour réinitialiser votre mot de passe, veuillez taper l’adresse électronique associé à votre compte </p>"; ?>
                 

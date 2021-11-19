@@ -122,45 +122,49 @@
         $alert1 = "";
         
         if( isset($_POST['email']) && !empty($_POST['email'])){
-            $email = securite::secureHTML($_POST['email']) ;
+            $destinataire = securite::secureHTML($_POST['email']) ;
             $user = getOneUserFromBdd($_POST['email']);
-            if($user == true) { 
-                $ctrl = 1;
-                sendEmail($email);
+            if($user) { 
+                $alert1="Votre demande a été prise en compte";
+                sendEmail($destinataire);
             } else {
-                $ctrl = 0;          
+                $alert ="L'email est incorrect";          
             } 
         } 
         require_once("views/front/users/getpassword.views.php") ; 
     }
 
-    function sendEmail($email){
-        require('PHPMailer/PHPMailerAutoload.php');
-        $token = 'fdryuopmknbcwqazertg';
-        //$mail = new PHPMailer();
-
-        $mail ->isSMTP();
-        $mail->Host='ssl0.ovh.net';
-        $mail->SMTPAuth = true;
-        $mail->Username='admin@acb92.com';
-        $mail->Password='123456789';
-        $mail->SMTPSecure ='tls';
-        $mail->Port=465;
-
-        $mail->setFrom('rickoungeli@gmail.com', 'ACB92.COM');
-        $mail->addAddress($email);
-
-        $mail->isHTML(true);
-        echo "bonjour";
-        $mail->Subject='Réinitialisation mot de passe';
-        $mail->Body = "Afin de réinitialiser votre adresse mot de passe, merci de cliquer sur le lien suivant: 
-        <a href='https://www.acb92.com/views/front/users/new_password.view.php?token='".$token."'&email='".$email."'>Réinitialiser mot de passe</a>";
-
-        if(!$mail->send()){
-            echo "Mail non envoyé";
-            echo 'Erreurs:'.$mail->ErrorInfo;
-        }else{
-            echo "Votre email a bien été envoyé";
+    function getPageNewPassword(){
+        $title = "Nouveau mot de passe" ;
+        $description = "Page de création du nouveau mot de passe";
+        $alert = "";
+        $alert1 = "";
+        
+        if( isset($_POST['passwordnew']) && !empty($_POST['passwordnew']) && isset($_POST['passwordconfirm']) && !empty($_POST['passwordconfirm'])){
+            $passwordnew = securite::secureHTML($_POST['passwordnew']) ;
+            $passwordconfirm = securite::secureHTML($_POST['passwordconfirm']) ;
+            //Affichage de la page de création du nouveau mot de passe
+            $alert1 = "";
+            $alert = "Cette fonctionnalité n'est pas encore disponible";
         }
+        require_once("views/front/users/new_password.views.php");
+        
+    }
+
+    function sendEmail($destinataire){
+        $objet = "Réinitialisation mot de passe";
+        $token = 'fdryuopmknbcwqazertg';
+        $message = "Afin de réinitialiser votre mot de passe, merci de cliquer sur le lien suivant: ";
+        $message .= "https://www.acb92.com/new_password?token=".$token."&email=".$destinataire.">";
+        $entetes = '';
+        $entetes .= "From: \"Admin\" <admin@acb92.com>\r\n";
+        $entetes .= "Reply-To: \"Contact\" <contact@acb92.com>\r\n";
+        $entetes .= "X-Priority: l\r\n";
+        if ($ok = mail($destinataire,$objet, $message, $entetes)) {
+            header ("Location: views/front/users/mailing_confirm.views.php") ;
+            
+        };
+        //echo $ok;
+        
     }
 ?>
