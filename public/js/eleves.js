@@ -155,70 +155,51 @@ function createNewEleve(names, firstname, commune){
 
 //Fonction pour récupérer et afficher tous les élèves
 function getAllElevesFromBdd(){
-    let xhr = new XMLHttpRequest()
-    xhr.onload = function(){
-        if(this.readyState == 4 && this.status == 200) {
-            datas = JSON.parse(this.responseText)
-            if(ctrl == "loadTableEleve"){printInTableEleves(datas)} else {loadListEleveInModale(datas)}
-            
-            
-        } else {
-            $errorMessage = "Un problème est survenu";
-            console.log($errorMessage);
-            //require_once("www.acb92.com/views/common/erreur.views.php") ;
-        }
-    }
-    xhr.open("GET", `../../models/eleves.dao.php?function=getAllElevesFromBdd`, true)
-    xhr.send()
+    fetch('https://www.acb92.com/models/eleves.dao.php?function=getAllElevesFromBdd')
+    .then(res => res.json())
+    .then(datas => {
+        if(ctrl == "loadTableEleve"){printInTableEleves(datas)} else {loadListEleveInModale(datas)}
+    })
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log($errorMessage);
+    })
 }
 
 //Fonction pour récupérer et afficher tous les élèves d'une section
 function getAllElevesOfSection(idsection){
-    let xhr = new XMLHttpRequest()
-    xhr.onload = function(){
-        if(this.readyState == 4 && this.status == 200) {
-            datas = JSON.parse(this.responseText)
-            printInTableEleves(datas)
-        } else {
-            $errorMessage = "Un problème est survenu";
-            console.log($errorMessage);
-            //require_once("www.acb92.com/views/common/erreur.views.php") ;
-        }
-    }
-    xhr.open("GET", `../../models/eleves.dao.php?function=getAllElevesOfSection&idsection=${idsection}`, true)
-    xhr.send()
+    fetch(`https://www.acb92.com/models/eleves.dao.php?function=getAllElevesOfSection&idsection=${idsection}`)
+    .then(res => res.json())
+    .then(datas => printInTableEleves(datas))
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log(err);
+    })
 }
 
-//Fonction pour récupérer et afficher tous les élèves d'une section
+//Fonction pour récupérer et afficher tous les élèves d'une classe
 function getAllElevesOfClasse(){
-    let xhr = new XMLHttpRequest()
-    xhr.onload = function(){
-        if(this.readyState == 4 && this.status == 200) {
-            datas = JSON.parse(this.responseText)
-            printInTableEleves(datas)
-        } else {
-            $errorMessage = "Un problème est survenu";
-            console.log($errorMessage);
-            //require_once("www.acb92.com/views/common/erreur.views.php") ;
-        }
-    }
-    xhr.open("GET", `../../models/eleves.dao.php?function=getAllElevesOfClasse&idclasse=${combo_classe.value}`)
-    xhr.send()
+    fetch(`https://www.acb92.com/models/eleves.dao.php?function=getAllElevesOfClasse&idclasse=${combo_classe.value}`)
+    .then(res => res.json())
+    .then(datas => printInTableEleves(datas))
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log(err);
+    })
 }
 
 function getIdEleve(names, firstname){
-    //const data = new FormData()
-    //data.append('names', names)
-    //data.append('firstname', firstname)
-    let xhr = new XMLHttpRequest()
-    xhr.onload = function(){
-        let id = JSON.parse(this.responseText)
-        ideleve = id.id
+    fetch(`https://www.acb92.com/models/eleves.dao.php?function=getIdEleve&names=${names}&firstname=${firstname}`)
+    .then(res => res.json())
+    .then(datas => {
+        ideleve = datas.id
         saveEleveInClasse(ideleve)
-        //return ideleve
-    }
-    xhr.open("GET", `../../models/eleves.dao.php?function=getIdEleve&names=${names}&firstname=${firstname}`)
-    xhr.send()
+    })
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log(err);
+    })
+
 }
 
 function loadListEleveInModale(datas){
@@ -245,28 +226,27 @@ function loadListEleveInModale(datas){
 function loadTableEleves(datas){ 
     closeOverlay()
     table.innerHTML = ""
-    let xhr = new XMLHttpRequest()
-    xhr.onload = function(){
+    fetch(`https://www.acb92.com/models/eleves.dao.php?idclasse=${combo_classe.value}&function=getElevesByClassFromBdd`)
+    .then(res => res.json())
+    .then(datas => {
         boutonAddEleve.classList.remove("d-none")
-        if(this.readyState == 4 && this.status == 200) {
-            datas = JSON.parse(this.responseText)
-            
-            if(datas.length >0){
-                printInTableEleves(datas);
-            }
-            else {
-                table.innerHTML = `
-                <tr class='text-center pt-3'>
-                    <td colspan='5' class='text-center pt-3'>
-                        <div class='alert alert-danger my-0' role='alert'>Aucun élève n'a été trouvé dans cette classe</div>
-                    </td>
-                </tr>`
-            }
+        if(datas.length >0){
+            printInTableEleves(datas);
         }
-    }
-    xhr.open("GET", `../../models/eleves.dao.php?idclasse=${combo_classe.value}&function=getElevesByClassFromBdd`, true)
-    xhr.send()
+        else {
+            table.innerHTML = `
+            <tr class='text-center pt-3'>
+                <td colspan='5' class='text-center pt-3'>
+                    <div class='alert alert-danger my-0' role='alert'>Aucun élève n'a été trouvé dans cette classe</div>
+                </td>
+            </tr>`
+        }
     
+    })
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log(err);
+    })
 }
 
 function maskInput(){
@@ -316,14 +296,7 @@ function saveEleve(){
         } else { //sinon il faut d'abord enregistrer l'élève
             createNewEleve(names, firstname, commune)
         }
-        
-    /*
-    } else {
-        names.value = ""
-        closeOverlay()
-    }
-    */
-   
+          
 }
 
 function saveEleveInClasse(ideleve){

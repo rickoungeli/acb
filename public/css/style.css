@@ -94,3 +94,7 @@ footer {
   scrollbar-color: rebeccapurple green;
   scrollbar-width: thin;
 }
+
+.bg-light-fonce {
+  background-color: rgb(109, 108, 108) !important;
+}

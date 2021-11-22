@@ -73,7 +73,7 @@ function insertPropositionOfActivite(){
 
 function getAllPropositionsOfActivityFromBdd(){
     $bdd = connexionPDO();
-    $req = "SELECT users.name AS auteur, activites.id AS idactivite, activites.secteur AS secteur, activites.libelle AS libelle, activites.comment AS comment, activites.date_cre AS date_cre  FROM activites, users WHERE activites.auteur = users.id ORDER BY auteur" ;
+    $req = "SELECT users.name AS auteur, activites.id AS idactivite, activites.secteur AS secteur, activites.libelle AS libelle, activites.comment AS comment, activites.date_cre AS date_cre  FROM activites, users WHERE activites.auteur = users.id ORDER BY date_cre DESC" ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->execute();
     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -29,6 +29,8 @@ try {
             break ;
             case "activites" : getPagePropositionActivitesProjet2022() ;
             break ;
+            case "exo1" : getPageExo1() ;
+            break ;
             case "error301" :
             case "error302" :
             case "error400" :
