@@ -16,6 +16,10 @@ switch ($function) {
         break;
     case "addNotification" : insertNotificationIntoBdd();
     break;
+    case "getAllCommentOfProjet2022" : 
+        $id = $_GET['idactivite'];
+        getAllCommentOfProjet2022($id);
+    break;
 }
 
 
@@ -101,5 +105,14 @@ function insertNotificationIntoBdd(){
     return true ;
 }
 
-
+function getAllCommentOfProjet2022($id){
+    $bdd = connexionPDO();
+    $req = 'SELECT commentaires.id AS idcomment, commentaires.date as datecomment, commentaires.content as content, users.name as username, users.firstname as userfirstname  FROM commentaires, users WHERE users.id=commentaires.id_user AND commentaires.id_post = :id ORDER BY datecomment DESC' ;
+    $stmt = $bdd -> prepare($req) ;
+    $stmt->bindValue(":id",$id,PDO::PARAM_INT);
+    $stmt->execute();
+    $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    echo json_encode($resultat); 
+}
 ?>

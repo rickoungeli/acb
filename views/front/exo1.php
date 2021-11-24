@@ -26,6 +26,7 @@ $titre1 = "";
                 <h5 class="modal-title text-primary">Proposition d'une activité</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
+            <!-- Formulaire de saisie d'une activité -->
             <div class="modal-body">
                 <h4>PROPOSITION D'ACTIVITES</h2>
                 <form action="" method="post" class="row no-gutters form py-1 mb-0">
@@ -47,7 +48,7 @@ $titre1 = "";
                     </div>
 
                     <div class="form-group mb-1 col-12 d-flex flex-column" id="form-group2">
-                        <label for="comment"  class="form-label text-dark">Votre Commentaire</label>
+                        <label for="comment"  class="form-label text-dark">Votre Explication</label>
                         <textarea class="form-control" name="comment" id="comment" cols="30" rows="10"></textarea>
                     </div>
                     <div class="col-12 text-center mb-1 ">

@@ -98,3 +98,7 @@ footer {
 .bg-light-fonce {
   background-color: rgb(109, 108, 108) !important;
 }
+
+div {
+  transition: d-none 300ms;
+}
