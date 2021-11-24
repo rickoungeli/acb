@@ -115,9 +115,9 @@ function loadSectionActivites(){
                     </div>  
                     </div>
                     <!-- FORMULAIRE DE SAISIE D'UN COMMENTAIRES -->
-                    <form name='form-new-comment'>
+                    <form name='form-new-comment' class='comment'>
                         <div onclick='showCommentDiv(${datas.indexOf(data)}, ${data.idactivite})' class='btn fw-bold' >Voir les commentaires</div>
-                        <div id='div' class='comment p-2 d-none' style='min-height:20px;'>
+                        <div id='div' class='p-2 d-none' style='min-height:20px;'>
                         </div>
                         <div class='d-flex'> 
                             <input id='input' type='text' class='form-control m-2' placeholder='Votre question ou commentaire'>
@@ -166,43 +166,37 @@ function showCommentDiv(index, idactivite){
     fetch(`https://www.acb92.com/models/projet2022.dao.php?function=getAllCommentOfProjet2022&idactivite=${idactivite}`)
     .then(res => res.json())
     .then(datas => {
-
-        
-        if(datas.length>0){
-
-
-
-            if (index != savedIndex) {
-                article.querySelector(`#${savedIndex}`).classList.toggle('d-none')
-                savedIndex = index
-
-            }
-        }
         article.querySelector(`#div`).classList.toggle('d-none')
-        loadCommentDiv(datas, index)
+
+        if(datas.length>0){
+            article.querySelector(`#div`).innerHTML = (
+                datas
+                .map(data => (
+                    `
+                    <h6 class='text-secondary'>${data.userfirstname} ${data.username}</h6>
+                    <div>${data.content}</div>
+                    <hr>
+                    `
+                )).join('')
+                
+            )
+            
+            
+        } else {
+            article.querySelector(`#div`).innerHTML =`<div class='alert alert-danger'>Aucun commentaire n'a été posté</div>`
+        }
         
+        if (savedIndex != 100000000000000000 && savedIndex != index) {
+            let article1 = document.getElementById(`${savedIndex}`) 
+            console.log(article1.querySelector('form').querySelector('#div'))
+            article1.querySelector('form').querySelector('#div').classList.add('d-none')
+        }
+        savedIndex = index
+        console.log ('savedIndex : ' + savedIndex)
+        console.log ('index : ' + index)
     })    
 
 }
 
 
-function loadCommentDiv(datas, index){
-    let article = document.getElementById(`${index}`)
-    if(datas.length>0){
-        article.querySelector(`#div`).innerHTML = (
-            datas
-            .map(data => (
-                `
-                <h6 class='text-secondary'>${data.userfirstname} ${data.username}</h6>
-                <div>${data.content}</div>
-                <hr>
-                `
-            )).join('')
-            
-        )
-    } else {
-        article.querySelector(`#div`).innerHTML =`<div class='alert alert-danger'>Aucun commentaire n'a été posté</div>`
-    }
 
-    
-}
