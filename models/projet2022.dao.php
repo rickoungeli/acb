@@ -20,6 +20,8 @@ switch ($function) {
         $id = $_GET['idactivite'];
         getAllCommentOfProjet2022($id);
     break;
+    case "addComment" : insertCommentIntoBdd();
+    break;
 }
 
 
@@ -107,12 +109,32 @@ function insertNotificationIntoBdd(){
 
 function getAllCommentOfProjet2022($id){
     $bdd = connexionPDO();
-    $req = 'SELECT commentaires.id AS idcomment, commentaires.date as datecomment, commentaires.content as content, users.name as username, users.firstname as userfirstname  FROM commentaires, users WHERE users.id=commentaires.id_user AND commentaires.id_post = :id ORDER BY datecomment DESC' ;
+    $req = 'SELECT commentaires.id AS idcomment, commentaires.date as datecomment, commentaires.content as content, users.name as username, users.firstname as userfirstname  FROM commentaires, users WHERE users.id=commentaires.id_user AND commentaires.id_post = :id ORDER BY datecomment ASC' ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->bindValue(":id",$id,PDO::PARAM_INT);
     $stmt->execute();
     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
+    //$resultat->id_user = $_SESSION['id'];
+    //var_dump($resultat);
     echo json_encode($resultat); 
+}
+
+function insertCommentIntoBdd(){
+    //On récupère les données envoyées par l'utilisateur
+    $id_post = $_POST['id_post'];
+    $id_user = $_POST['id_user'];
+    $content = $_POST['content'];
+
+    //On enregistre le commentaire dans la bdd
+    $bdd = connexionPDO();
+    $req = "INSERT INTO commentaires (id_post, id_user, content) VALUES (:id_post, :id_user, :content)" ;
+    $stmt = $bdd -> prepare($req) ;
+    $stmt->bindValue(":id_post",$id_post,PDO::PARAM_INT);
+    $stmt->bindValue(":id_user",$id_user,PDO::PARAM_INT);
+    $stmt->bindValue(":content",$content,PDO::PARAM_STR);
+    $stmt->execute();
+    $stmt->closeCursor();
+    return true ;
 }
 ?>

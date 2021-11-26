@@ -10,7 +10,7 @@ $titre1 = "";
     <input type="text" name="id_user" class="d-none"/>
     <a href="#" class="btn btn-primary" id="btn-show-overlay-add-activite">Proposer une activité" </a>
 </form>
-
+<input type='hidden' id='id-user' value=<?php echo $_SESSION['id']; ?> >
 <!-- AFFICHAGE DES PROJETS PROPOSES -->
 
 <section class="col-12" id="section-activites">

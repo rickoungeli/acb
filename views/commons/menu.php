@@ -40,9 +40,9 @@
                         
                     <?php 
                     if(Securite::verificationAccess()) {
-                        echo "<a href='". URL ."deconnexion' class='nav-link m-0 text-light'><i class='fas fa-user-lock'></i> Se déconnecter</a>";
+                        echo "<a href='". URL ."deconnexion' class='text-center nav-link m-0 p-0 text-light'><img src='public/images/icones/lock-solid.svg' class='m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'><br>Déconnexion</a>";
                     } else {
-                        echo "<a href='". URL ."login' class='nav-link m-0 '><i class='fas fa-user-lock'></i> Se connecter</a>";
+                        echo "<a href='". URL ."login' class='text-center nav-link m-0 p-0 '><img src='public/images/icones/user-lock-solid.svg' class='m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'><br>Connexion</a>";
                     } 
                     ?>
                     </li>

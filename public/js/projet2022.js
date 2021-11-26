@@ -115,14 +115,29 @@ function loadSectionActivites(){
                     </div>  
                     </div>
                     <!-- FORMULAIRE DE SAISIE D'UN COMMENTAIRES -->
-                    <form name='form-new-comment' class='comment'>
-                        <div onclick='showCommentDiv(${datas.indexOf(data)}, ${data.idactivite})' class='btn fw-bold' >Voir les commentaires</div>
-                        <div id='div' class='p-2 d-none' style='min-height:20px;'>
+                    <div class='row no-gutters text-start'>
+                        <div class='col-10' onclick='showCommentDiv(${datas.indexOf(data)}, ${data.idactivite}, 0)' >
+                            <span class='btn fw-bold text-start' >Voir les commentaires </span> 
+                            <img src='public/images/icones/rocketchat-brands.svg' class='d-inline m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'>  
                         </div>
-                        <div class='d-flex'> 
-                            <input id='input' type='text' class='form-control m-2' placeholder='Votre question ou commentaire'>
-                            <button onclick='saveComment(${datas.indexOf(data)}, ${data.idactivite})' class='btn py-0 px-2 me-2 mt-2 border border-secondary rounded text-align-center disabled'> >>> </button>
+                        <div class='col-2 d-flex text-end like'>
+                            <span>
+                                <label for='like' class='d-flex'>
+                                    <span class='me-1 d-none d-md-inline like3'>J'aime </span> 
+                                    <img src='public/images/icones/thumbs-up-regular.svg' class='like1 m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'>
+                                    <img src='public/images/icones/thumbs-up-solid-svg.svg' class='like2 m-0 p-0 d-none' style='max-height: 20px; color: blue;'> 
+                                </label>
+                                <input type='checkbox' id='like' class='d-none'/>
+                            </span>
                         </div>
+                    </div>
+                    <div id='div' class='p-2 d-none' style='min-height:20px;'>
+                    </div>
+                    <form method='post' class='d-flex commentForm' onsubmit=saveComment>
+                        <input id='input' type='text' class='comment form-control m-2' placeholder='Votre question ou commentaire'>
+                        <input type='hidden' value=${datas.indexOf(data)} class='index '>
+                        <input type='hidden' value=${data.idactivite} class='idpost '>
+                        <input type='submit' value='>>>' class='submitbtn btn py-0 px-2 me-2 mt-2 border border-secondary rounded text-align-center'> 
                     </form>
                 </article>
                 `
@@ -160,16 +175,17 @@ function addNotification(message){
     xhr.send(data)
 }
 
-function showCommentDiv(index, idactivite){
+function showCommentDiv(index, idpost, codeOpen){
     datas=[]
-    let article = document.getElementById(`${index}`)     
-    fetch(`https://www.acb92.com/models/projet2022.dao.php?function=getAllCommentOfProjet2022&idactivite=${idactivite}`)
+    let article = document.getElementById(`${index}`) 
+    console.log(savedIndex);   
+    fetch(`https://www.acb92.com/models/projet2022.dao.php?function=getAllCommentOfProjet2022&idactivite=${idpost}`)
     .then(res => res.json())
     .then(datas => {
-        article.querySelector(`#div`).classList.toggle('d-none')
-
+        
+        codeOpen==1 ? article.querySelector('#div').classList.remove('d-none') : article.querySelector(`#div`).classList.toggle('d-none')
         if(datas.length>0){
-            article.querySelector(`#div`).innerHTML = (
+            article.querySelector('#div').innerHTML = (
                 datas
                 .map(data => (
                     `
@@ -177,26 +193,78 @@ function showCommentDiv(index, idactivite){
                     <div>${data.content}</div>
                     <hr>
                     `
-                )).join('')
-                
+                )).join('') 
             )
-            
-            
         } else {
-            article.querySelector(`#div`).innerHTML =`<div class='alert alert-danger'>Aucun commentaire n'a été posté</div>`
+            article.querySelector(`#div`).innerHTML =`<div class='alert alert-danger py-0 my-0'>Aucun commentaire n'a été posté</div>`
         }
         
         if (savedIndex != 100000000000000000 && savedIndex != index) {
             let article1 = document.getElementById(`${savedIndex}`) 
-            console.log(article1.querySelector('form').querySelector('#div'))
-            article1.querySelector('form').querySelector('#div').classList.add('d-none')
+            
+            article1.querySelector('#div').classList.add('d-none')
         }
         savedIndex = index
-        console.log ('savedIndex : ' + savedIndex)
-        console.log ('index : ' + index)
+        
     })    
 
 }
 
+//Ajout d'un commentaire
+setTimeout(()=>{
+    let forms = document.querySelectorAll('.commentForm')
+    for(let form of forms){
+        
+        form.addEventListener('submit', (e)=>{
+            e.preventDefault()
+            let content = form.querySelector('.comment').value
+            let index = form.querySelector('.index').value
+            let id_post = form.querySelector('.idpost').value
+            form.querySelector('.comment').value=""
+            saveComment(index, id_post, content)
+        })
+    }
+},200)
+
+//Ajout d'un j'aime
+setTimeout(()=>{
+    let likes = document.querySelectorAll('.like')
+    for(let like of likes){
+        like.addEventListener('click', ()=>{
+            let clicked = like.querySelector('#like').checked
+            if (clicked == true) {
+                like.querySelector('.like1').classList.add('d-none')
+                like.querySelector('.like2').classList.remove('d-none')
+                like.querySelector('.like3').style.color='blue'
+            } else {
+                like.querySelector('.like1').classList.remove('d-none')
+                like.querySelector('.like2').classList.add('d-none')
+                like.querySelector('.like3').style.color='black'
+            }
+            
+            
+        
+        })
+    }
+},200)
+
+function saveComment(index, id_post, content){
+    
+    const data = new FormData()
+    data.append('id_post', id_post)
+    data.append('id_user', document.querySelector('#id-user').value)
+    data.append('content', content)
+    fetch('https://www.acb92.com/models/projet2022.dao.php?function=addComment', { method: 'POST', body: data })
+    .then((res) => {
+        res.status==200? showCommentDiv(index, id_post, 1) : console.log(res.status);
+    })
+    .catch(err => {
+        $errorMessage = "Un problème est survenu";
+        console.log($errorMessage);
+    })
+
+    
+    
+}
 
 
