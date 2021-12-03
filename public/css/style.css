@@ -5,6 +5,7 @@
   font-family: 'Roboto', sans-serif;
   outline: none;
 }
+
 .z-index-1000 {
   z-index: 1000;
 }
@@ -101,4 +102,18 @@ footer {
 
 div {
   transition: d-none 300ms;
+}
+#text-comment{
+  position: relative;
+  padding-left: 25px!important;
+}
+#text-comment::before {
+  position: absolute;
+  top: 7px; 
+  left: 0;
+  height: 20px;
+  width: 30px;
+
+  background-image: '';
+  content: '💬';
 }

@@ -87,7 +87,7 @@ function loadSectionActivites(){
                     <div class='d-flex justify-content-between bg-light-fonce '>
                         <!-- L'UTILISATEUR QUI A PUBLIE -->
                         <div class='d-flex' id='user-infos'> 
-                            <img src='../../public/images/profil_picture.png' style='width : 50px;' class='card-img-top profil-picture rounded-circle' alt=''>
+                            <img src='https://www.acb92.com/public/images/icones/avatar1.png' style='width : 40px;' class='card-img-top profil-picture rounded-circle' alt=''>
                             <div class='card-text d-flex flex-column'>
                                 <p class='d-none'>${data.idactivite} </p>
                                 <p class='text-white fw-bold m-0 text-shadow'> ${data.auteur} </p>
@@ -115,25 +115,23 @@ function loadSectionActivites(){
                     </div>  
                     </div>
                     <!-- FORMULAIRE DE SAISIE D'UN COMMENTAIRES -->
-                    <div class='row no-gutters text-start'>
-                        <div class='col-10' onclick='showCommentDiv(${datas.indexOf(data)}, ${data.idactivite}, 0)' >
-                            <span class='btn fw-bold text-start' >Voir les commentaires </span> 
-                            <img src='public/images/icones/rocketchat-brands.svg' class='d-inline m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'>  
-                        </div>
-                        <div class='col-2 d-flex text-end like'>
-                            <span>
+                    <div class='row no-gutters text-start py-0'>
+                        <span class='col-8' onclick='showCommentDiv(${datas.indexOf(data)}, ${data.idactivite}, 0)' >
+                            <span class='btn fw-bold text-start' id='text-comment' >${data.nbre_comment} commentaire(s) </span> 
+                        </span>
+                        <span class='like col-4'>
                                 <label for='like' class='d-flex'>
-                                    <span class='me-1 d-none d-md-inline like3'>J'aime </span> 
+                                    <span class='me-1 like3'> 0 j'aime </span> 
                                     <img src='public/images/icones/thumbs-up-regular.svg' class='like1 m-0 p-0' style='max-height: 20px; color: rgb(34, 33, 33);'>
                                     <img src='public/images/icones/thumbs-up-solid-svg.svg' class='like2 m-0 p-0 d-none' style='max-height: 20px; color: blue;'> 
                                 </label>
                                 <input type='checkbox' id='like' class='d-none'/>
-                            </span>
-                        </div>
+                        </span>
                     </div>
                     <div id='div' class='p-2 d-none' style='min-height:20px;'>
                     </div>
                     <form method='post' class='d-flex commentForm' onsubmit=saveComment>
+                        <div class='pt-2'><input type='file' class='d-none'><img src='public/images/photos.png'  title='insérer une photo' style='width: 30px;'></div>
                         <input id='input' type='text' class='comment form-control m-2' placeholder='Votre question ou commentaire'>
                         <input type='hidden' value=${datas.indexOf(data)} class='index '>
                         <input type='hidden' value=${data.idactivite} class='idpost '>
@@ -177,8 +175,7 @@ function addNotification(message){
 
 function showCommentDiv(index, idpost, codeOpen){
     datas=[]
-    let article = document.getElementById(`${index}`) 
-    console.log(savedIndex);   
+    let article = document.getElementById(`${index}`)  
     fetch(`https://www.acb92.com/models/projet2022.dao.php?function=getAllCommentOfProjet2022&idactivite=${idpost}`)
     .then(res => res.json())
     .then(datas => {
@@ -195,6 +192,9 @@ function showCommentDiv(index, idpost, codeOpen){
                     `
                 )).join('') 
             )
+            //Mise à jour de l'affichage du nombre des commentaires
+            let textComment = article.querySelector('#text-comment')
+            
         } else {
             article.querySelector(`#div`).innerHTML =`<div class='alert alert-danger py-0 my-0'>Aucun commentaire n'a été posté</div>`
         }
@@ -214,7 +214,6 @@ function showCommentDiv(index, idpost, codeOpen){
 setTimeout(()=>{
     let forms = document.querySelectorAll('.commentForm')
     for(let form of forms){
-        
         form.addEventListener('submit', (e)=>{
             e.preventDefault()
             let content = form.querySelector('.comment').value
@@ -248,6 +247,7 @@ setTimeout(()=>{
     }
 },200)
 
+//Fonction pour enregistrer un commentaire
 function saveComment(index, id_post, content){
     
     const data = new FormData()
@@ -256,11 +256,19 @@ function saveComment(index, id_post, content){
     data.append('content', content)
     fetch('https://www.acb92.com/models/projet2022.dao.php?function=addComment', { method: 'POST', body: data })
     .then((res) => {
-        res.status==200? showCommentDiv(index, id_post, 1) : console.log(res.status);
+        if(res.status==200) {  
+            showCommentDiv(index, id_post, 1) 
+            textComment.innerHTML = (textComment.innerHTML.split(' ')[0] +1) + ' Commentaires(s)'
+        } else {
+            console.log(res.status);
+
+        } 
+            
+            
     })
     .catch(err => {
         $errorMessage = "Un problème est survenu";
-        console.log($errorMessage);
+        console.log(err);
     })
 
     

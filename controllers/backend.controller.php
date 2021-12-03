@@ -1,8 +1,8 @@
 <?php 
+    
     require_once("config/config.php");
     require("models/user.dao.php") ;
-
-
+  
 
     function getPageLogin(){
         $title = "Page de connexion" ;
@@ -41,7 +41,7 @@
                     $_SESSION['id'] = $user['id'];
                     $_SESSION['name'] = $user['name'];
                     Securite::genereCookiePassword();
-                    header ("Location: accueil") ;
+                    header ("Location: views/front/accueil.views.php") ;
                 } else {
                     $alert = "Mot de passe incorrect " ; 
                     require_once("views/front/login.views.php") ;
@@ -155,7 +155,7 @@
         $objet = "Réinitialisation mot de passe";
         $token = 'fdryuopmknbcwqazertg';
         $message = "Afin de réinitialiser votre mot de passe, merci de cliquer sur le lien suivant: ";
-        $message .= "https://www.acb92.com/new_password?token=".$token."&email=".$destinataire.">";
+        $message .= "new_password?token=".$token."&email=".$destinataire.">";
         $entetes = '';
         $entetes .= "From: \"Admin\" <admin@acb92.com>\r\n";
         $entetes .= "Reply-To: \"Contact\" <contact@acb92.com>\r\n";

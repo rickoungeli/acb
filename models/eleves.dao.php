@@ -1,12 +1,15 @@
 <?php 
+
+/*
 const HOST_NAME = "nsxuijracb92.mysql.db";
 const DATABASE_NAME = "nsxuijracb92";
 const USER_NAME = "nsxuijracb92";
 const PASSWORD = "Le29011974";
-//require_once("../config/config.php");
+*/
+require_once("config/config.php");
 require_once("pdo.php");
 
-//if(isset($_GET['function']) && !empty($_GET['function'])){
+if(isset($_GET['function']) && !empty($_GET['function'])){
     $function = $_GET['function'] ;
     switch ($function) {
         case "getAllElevesFromBdd" : getAllElevesFromBdd() ;
@@ -27,7 +30,7 @@ require_once("pdo.php");
         case "getIdEleve" : getIdEleve() ;
             break ;
     }
-//}
+}
 function createNewEleve(){
     $names = $_POST['names'];
     if($_POST['firstname'] != "") {$firstname = $_POST['firstname'];} else {$firstname = "";}

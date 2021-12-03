@@ -1,5 +1,5 @@
 <?php 
-    require_once("config/config.php");
+    //require_once("config/config.php");
     require_once("models/eleves.dao.php");
     require_once("models/sections.dao.php");
     require_once("models/projet2022.dao.php");

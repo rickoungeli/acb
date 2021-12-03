@@ -9,14 +9,13 @@
     <meta name="description" content="<?= $description ?> ">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="auteur" content="NGELI NSABAKA Rickou">
+    <script src="https://kit.fontawesome.com/daa2a72b15.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" type="image/png" href="<?= URL ?>public/images/icones/award-fill.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/fontawesome.min.css" integrity="sha512-r9kUVFtJ0e+8WIL8sjTUlHGbTLwlOClXhVqGgu4sb7ILdkBvM2uI+n/Fz3FN8u3VqJX7l9HLiXqXxkx2mZpkvQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<?= URL ?>public/css/style.css">
-    <script src="https://kit.fontawesome.com/daa2a72b15.js" crossorigin="anonymous"></script>
     <title><?= $title ?></title>
 </head>
 

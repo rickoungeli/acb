@@ -1,29 +1,30 @@
 <?php
-session_start();
-
+/*
 const HOST_NAME = "nsxuijracb92.mysql.db";
 const DATABASE_NAME = "nsxuijracb92";
 const USER_NAME = "nsxuijracb92";
 const PASSWORD = "Le29011974";
+*/
 //require_once("../config/config.php");
 require_once("pdo.php");
 
-$function = $_GET['function'] ;
-switch ($function) {
-    case "insertPropositionOfActivite" : insertPropositionOfActivite() ;
-        break ;
-    case "getAllPropositionsOfActivityFromBdd" : getAllPropositionsOfActivityFromBdd();
+if(isset($_GET['function']) && !empty($_GET['function'])){
+    $function = $_GET['function'] ;
+    switch ($function) {
+        case "insertPropositionOfActivite" : insertPropositionOfActivite() ;
+            break ;
+        case "getAllPropositionsOfActivityFromBdd" : getAllPropositionsOfActivityFromBdd();
+            break;
+        case "addNotification" : insertNotificationIntoBdd();
         break;
-    case "addNotification" : insertNotificationIntoBdd();
-    break;
-    case "getAllCommentOfProjet2022" : 
-        $id = $_GET['idactivite'];
-        getAllCommentOfProjet2022($id);
-    break;
-    case "addComment" : insertCommentIntoBdd();
-    break;
+        case "getAllCommentOfProjet2022" : 
+            $id = $_GET['idactivite'];
+            getAllCommentOfProjet2022($id);
+        break;
+        case "addComment" : insertCommentIntoBdd();
+        break;
+    }
 }
-
 
 function getOneMemberFromProjet2022($id){
     $bdd = connexionPDO();
@@ -79,7 +80,7 @@ function insertPropositionOfActivite(){
 
 function getAllPropositionsOfActivityFromBdd(){
     $bdd = connexionPDO();
-    $req = "SELECT users.name AS auteur, activites.id AS idactivite, activites.secteur AS secteur, activites.libelle AS libelle, activites.comment AS comment, activites.date_cre AS date_cre  FROM activites, users WHERE activites.auteur = users.id ORDER BY date_cre DESC" ;
+    $req = "SELECT users.name AS auteur, activites.id AS idactivite, activites.secteur AS secteur, activites.libelle AS libelle, activites.comment AS comment, activites.date_cre AS date_cre, activites.nbre_comment AS nbre_comment  FROM activites, users WHERE activites.auteur = users.id ORDER BY date_cre DESC" ;
     $stmt = $bdd -> prepare($req) ;
     $stmt->execute();
     $resultat = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -135,6 +136,22 @@ function insertCommentIntoBdd(){
     $stmt->bindValue(":content",$content,PDO::PARAM_STR);
     $stmt->execute();
     $stmt->closeCursor();
-    return true ;
+    updateCommentNumber($id_post);
+}
+
+function updateCommentNumber($id_post){
+    try{
+        $bdd = connexionPDO();
+        $req = "UPDATE activites SET nbre_comment = (SELECT COUNT(commentaires.id_post) FROM commentaires WHERE id_post = :id_post) WHERE id = :id_post";
+        $stmt = $bdd -> prepare($req) ;
+        $stmt->bindValue(":id_post",$id_post,PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->closeCursor();
+        return true ;
+    }
+    catch(PDOException $e){
+        $errorMessage = $e->getMessage() ;
+        require_once("views/front/error.views.php") ;
+    }
 }
 ?>

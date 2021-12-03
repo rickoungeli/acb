@@ -1,6 +1,6 @@
 <?php
 const HOST_NAME = "127.0.0.1";
-const DATABASE_NAME = "acb92";
+const DATABASE_NAME = "nsxuijracb92";
 const USER_NAME = "root";
 const PASSWORD = "";
 
@@ -14,4 +14,5 @@ const PASSWORD = "Le29011974";
 const COOKIE_PROTECT = "timer" ;
 
 define("URL",str_replace("index.php","",(isset($_SERVER["HTTPS"])? "https" : "http"). "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
+
 ?>
